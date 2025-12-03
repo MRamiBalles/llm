@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EvoAI Research Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-dna accent-icon"></i>
+                <span>Evo<span class="text-accent">AI</span> Lab</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <button class="nav-item active" data-tab="dashboard">
+                    <i class="fa-solid fa-chart-line"></i> Dashboard
+                </button>
+                <button class="nav-item" data-tab="genome">
+                    <i class="fa-solid fa-microchip"></i> Genome Architect
+                </button>
+                <button class="nav-item" data-tab="papers">
+                    <i class="fa-solid fa-book-journal-whills"></i> Knowledge Base
+                </button>
+                <button class="nav-item" data-tab="settings">
+                    <i class="fa-solid fa-sliders"></i> Settings
+                </button>
+            </nav>
+
+            <div class="status-panel">
+                <div class="status-item">
+                    <span class="label">System</span>
+                    <span class="value online">ONLINE</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">GPU</span>
+                    <span class="value">DETECTING...</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1 id="page-title">Mission Control</h1>
+                <div class="actions">
+                    <button class="btn btn-secondary"><i class="fa-solid fa-rotate"></i> Sync</button>
+                    <button class="btn btn-primary"><i class="fa-solid fa-play"></i> Start Evolution</button>
+                </div>
+            </header>
+
+            <div id="content-area">
+                <!-- Dashboard View -->
+                <div id="view-dashboard" class="view active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fa-solid fa-users-viewfinder"></i></div>
+                            <div class="stat-info">
+                                <h3>Population</h3>
+                                <p class="stat-value">0</p>
+                                <span class="stat-sub">Active Models</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fa-solid fa-trophy"></i></div>
+                            <div class="stat-info">
+                                <h3>Best Fitness</h3>
+                                <p class="stat-value">--</p>
+                                <span class="stat-sub">Loss Value</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                            <div class="stat-info">
+                                <h3>Generation</h3>
+                                <p class="stat-value">0</p>
+                                <span class="stat-sub">Current Epoch</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container glass-panel">
+                        <h2><i class="fa-solid fa-wave-square"></i> Real-time Evolution Metrics</h2>
+                        <canvas id="evolutionChart"></canvas>
+                    </div>
+
+                    <div class="logs-container glass-panel">
+                        <h2><i class="fa-solid fa-terminal"></i> System Logs</h2>
+                        <div class="terminal-window" id="terminal-output">
+                            <div class="log-line"><span class="timestamp">[INIT]</span> System initialized. Waiting for input...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Genome View -->
+                <div id="view-genome" class="view" style="display: none;">
+                    <div class="genome-builder glass-panel">
+                        <h2><i class="fa-solid fa-dna"></i> Architecture DNA</h2>
+                        <p class="description">Configure the search space for the evolutionary algorithm.</p>
+                        
+                        <div class="control-group">
+                            <label>Layers (Depth)</label>
+                            <div class="range-wrapper">
+                                <input type="range" min="2" max="12" value="4" class="slider" id="layers-slider">
+                                <span class="value-display" id="layers-val">4</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label>Heads (Attention)</label>
+                            <div class="range-wrapper">
+                                <input type="range" min="2" max="16" value="4" class="slider" id="heads-slider">
+                                <span class="value-display" id="heads-val">4</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label>Embedding Size (d_model)</label>
+                            <select class="select-input">
+                                <option>128</option>
+                                <option selected>256</option>
+                                <option>512</option>
+                                <option>768</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Papers View -->
+                <div id="view-papers" class="view" style="display: none;">
+                    <div class="glass-panel">
+                        <h2><i class="fa-solid fa-database"></i> Disruptive Knowledge Base</h2>
+                        <div class="empty-state">
+                            <i class="fa-regular fa-folder-open"></i>
+                            <p>No papers ingested yet. Run the scraper to populate.</p>
+                            <button class="btn btn-small">Run Scraper</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
