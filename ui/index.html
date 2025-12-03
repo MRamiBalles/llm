@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EvoAI Research Lab</title>
+    <title>Cortex-1 Research Station</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <div class="app-container">
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="brand">
-                <i class="fa-solid fa-dna accent-icon"></i>
-                <span>Evo<span class="text-accent">AI</span> Lab</span>
+                <i class="fa-solid fa-brain-circuit accent-icon"></i>
+                <span>Cortex<span class="text-accent">-1</span> Lab</span>
             </div>
-            
+
             <nav class="nav-menu">
                 <button class="nav-item active" data-tab="dashboard">
-                    <i class="fa-solid fa-chart-line"></i> Dashboard
+                    <i class="fa-solid fa-chart-line"></i> Mission Control
                 </button>
                 <button class="nav-item" data-tab="genome">
-                    <i class="fa-solid fa-microchip"></i> Genome Architect
+                    <i class="fa-solid fa-microchip"></i> Cortex Blueprint
                 </button>
                 <button class="nav-item" data-tab="papers">
-                    <i class="fa-solid fa-book-journal-whills"></i> Knowledge Base
+                    <i class="fa-solid fa-book-journal-whills"></i> Universal Curriculum
                 </button>
                 <button class="nav-item" data-tab="settings">
                     <i class="fa-solid fa-sliders"></i> Settings
@@ -95,60 +99,18 @@
                     <div class="logs-container glass-panel">
                         <h2><i class="fa-solid fa-terminal"></i> System Logs</h2>
                         <div class="terminal-window" id="terminal-output">
-                            <div class="log-line"><span class="timestamp">[INIT]</span> System initialized. Waiting for input...</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Genome View -->
-                <div id="view-genome" class="view" style="display: none;">
-                    <div class="genome-builder glass-panel">
-                        <h2><i class="fa-solid fa-dna"></i> Architecture DNA</h2>
-                        <p class="description">Configure the search space for the evolutionary algorithm.</p>
-                        
-                        <div class="control-group">
-                            <label>Layers (Depth)</label>
-                            <div class="range-wrapper">
-                                <input type="range" min="2" max="12" value="4" class="slider" id="layers-slider">
-                                <span class="value-display" id="layers-val">4</span>
+                            <div class="empty-state">
+                                <i class="fa-regular fa-folder-open"></i>
+                                <p>No papers ingested yet. Run the scraper to populate.</p>
+                                <button class="btn btn-small">Run Scraper</button>
                             </div>
                         </div>
-
-                        <div class="control-group">
-                            <label>Heads (Attention)</label>
-                            <div class="range-wrapper">
-                                <input type="range" min="2" max="16" value="4" class="slider" id="heads-slider">
-                                <span class="value-display" id="heads-val">4</span>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label>Embedding Size (d_model)</label>
-                            <select class="select-input">
-                                <option>128</option>
-                                <option selected>256</option>
-                                <option>512</option>
-                                <option>768</option>
-                            </select>
-                        </div>
                     </div>
-                </div>
-                
-                <!-- Papers View -->
-                <div id="view-papers" class="view" style="display: none;">
-                    <div class="glass-panel">
-                        <h2><i class="fa-solid fa-database"></i> Disruptive Knowledge Base</h2>
-                        <div class="empty-state">
-                            <i class="fa-regular fa-folder-open"></i>
-                            <p>No papers ingested yet. Run the scraper to populate.</p>
-                            <button class="btn btn-small">Run Scraper</button>
-                        </div>
-                    </div>
-                </div>
 
-            </div>
+                </div>
         </main>
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
