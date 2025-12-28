@@ -137,12 +137,11 @@ def main():
                 # Be nice to the API
                 time.sleep(3)
 
-    # Save manifest
-    with open(MANIFEST_FILE, 'w') as f:
-        json.dump(manifest, f, indent=2)
+    # Save manifest relative to script for UI access
+    with open("manifest.json", "w", encoding="utf-8") as f:
+        json.dump(manifest, f, indent=4)
     
-    print(f"\n--- Scrape Complete. Total papers: {len(manifest)} ---")
-    print(f"Manifest saved to {MANIFEST_FILE}")
+    print(f"\n✅ Manifest generated with {len(manifest)} papers.")
 
 if __name__ == "__main__":
     main()

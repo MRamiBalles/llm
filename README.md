@@ -25,16 +25,11 @@ Welcome to the **Cortex Lab**, a professional-grade research environment for dev
 /
 ├── .gemini/             # Internal configurations
 ├── research/            # Legacy research & experiments (Re-indexed v1-v4)
-│   ├── v1_foundations.ipynb
-│   ├── v2_transfer_learning.ipynb
-│   ├── v3_architectural_benchmarks.ipynb
-│   └── v4_advanced_optimizations.ipynb
-├── ui/                  # Premium Vue/JS Research Station
-│   ├── index.html
-│   ├── style.css
-│   └── script.js
-├── Cortex_Master_Lab.ipynb  # Flagship research notebook (entry point)
-├── cortex_model.py          # Production-grade model implementation
+├── ui/                  # Premium Research Station
+├── BIBLIOGRAPHY.md     # Academic grounding and research papers
+├── ROADMAP.md          # Strategy for scaling and multi-modality
+├── Cortex_Master_Lab.ipynb  # Flagship research notebook
+├── cortex_model.py          # Production-grade implementation
 └── scraper.py               # Scientific ArXiv pulse scraper
 ```
 

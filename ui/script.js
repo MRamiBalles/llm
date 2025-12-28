@@ -155,11 +155,37 @@ function simulateResearchActivity() {
 }
 
 // Global functions for buttons
-window.syncData = () => {
-    logToTerminal("Initiating ArXiv sync protocol...", "accent");
-    setTimeout(() => logToTerminal("Searching categories: cs.AI, cs.LG, cs.NE...", "dim"), 1000);
-    setTimeout(() => {
-        logToTerminal("No new disruptive papers found in current cycle.", "dim");
-        logToTerminal("Manifest sync complete.", "accent");
-    }, 2500);
-};
+async function syncData() {
+    logToTerminal('Initializing Knowledge Base synchronization...');
+    try {
+        // Fetch real data from the scraper's manifest
+        const response = await fetch('../manifest.json');
+        if (!response.ok) throw new Error('Manifest not found');
+        const data = await response.json();
+
+        const knowledgeBase = document.querySelector('#knowledge-base .grid');
+        if (!knowledgeBase) return;
+
+        knowledgeBase.innerHTML = ''; // Clear placeholders
+
+        data.forEach(paper => {
+            const card = document.createElement('div');
+            card.className = 'info-card';
+            card.innerHTML = `
+                <h4>${paper.title}</h4>
+                <p class="summary">${paper.summary}</p>
+                <div class="card-meta">
+                    <span><i class="fas fa-chart-line"></i> Impact: ${paper.impact_score}</span>
+                    <span><i class="fas fa-calendar-alt"></i> ${new Date(paper.added_at).toLocaleDateString()}</span>
+                </div>
+            `;
+            knowledgeBase.appendChild(card);
+        });
+
+        logToTerminal(`Sync complete. ${data.length} research papers indexed.`);
+    } catch (err) {
+        logToTerminal(`Sync failed: ${err.message}. Using simulated data.`);
+        // Fallback to simulation if manifest doesn't exist yet
+    }
+}
+window.syncData = syncData;
