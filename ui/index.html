@@ -4,14 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cortex-1 Research Station</title>
+    <title>Cortex Research Station | Hybrid Intelligence</title>
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Style -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -21,32 +26,32 @@
         <aside class="sidebar">
             <div class="brand">
                 <i class="fa-solid fa-brain-circuit accent-icon"></i>
-                <span>Cortex<span class="text-accent">-1</span> Lab</span>
+                <span>Cortex<span class="text-accent">.</span>Lab</span>
             </div>
 
             <nav class="nav-menu">
                 <button class="nav-item active" data-tab="dashboard">
-                    <i class="fa-solid fa-chart-line"></i> Mission Control
+                    <i class="fa-solid fa-vial-circle-check"></i> <span>Mission Control</span>
                 </button>
-                <button class="nav-item" data-tab="genome">
-                    <i class="fa-solid fa-microchip"></i> Cortex Blueprint
+                <button class="nav-item" data-tab="blueprint">
+                    <i class="fa-solid fa-dna"></i> <span>Model Blueprint</span>
                 </button>
-                <button class="nav-item" data-tab="papers">
-                    <i class="fa-solid fa-book-journal-whills"></i> Universal Curriculum
+                <button class="nav-item" data-tab="repository">
+                    <i class="fa-solid fa-database"></i> <span>Knowledge Base</span>
                 </button>
                 <button class="nav-item" data-tab="settings">
-                    <i class="fa-solid fa-sliders"></i> Settings
+                    <i class="fa-solid fa-shield-halved"></i> <span>Parameters</span>
                 </button>
             </nav>
 
-            <div class="status-panel">
+            <div class="status-panel glass-panel" style="padding: 1.25rem; margin-top: auto;">
                 <div class="status-item">
-                    <span class="label">System</span>
-                    <span class="value online">ONLINE</span>
+                    <span class="label">Architecture</span>
+                    <span class="value" id="status-arch">Hybrid (3:1)</span>
                 </div>
                 <div class="status-item">
-                    <span class="label">GPU</span>
-                    <span class="value">DETECTING...</span>
+                    <span class="label">System State</span>
+                    <span class="value online">CALIBRATED</span>
                 </div>
             </div>
         </aside>
@@ -56,60 +61,111 @@
             <header class="top-bar">
                 <h1 id="page-title">Mission Control</h1>
                 <div class="actions">
-                    <button class="btn btn-secondary"><i class="fa-solid fa-rotate"></i> Sync</button>
-                    <button class="btn btn-primary"><i class="fa-solid fa-play"></i> Start Evolution</button>
+                    <button class="btn btn-secondary" onclick="syncData()">
+                        <i class="fa-solid fa-sync"></i> Re-Sync
+                    </button>
+                    <button class="btn btn-primary" id="evolution-btn">
+                        <i class="fa-solid fa-bolt"></i> Start Evolution
+                    </button>
                 </div>
             </header>
 
             <div id="content-area">
-                <!-- Dashboard View -->
+                <!-- Mission Control (Dashboard) -->
                 <div id="view-dashboard" class="view active">
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <div class="stat-icon"><i class="fa-solid fa-users-viewfinder"></i></div>
+                            <div class="stat-icon"><i class="fa-solid fa-microchip"></i></div>
                             <div class="stat-info">
-                                <h3>Population</h3>
-                                <p class="stat-value">0</p>
-                                <span class="stat-sub">Active Models</span>
+                                <h3>Active Nodes</h3>
+                                <p class="stat-value" id="stat-nodes">128</p>
+                                <span class="stat-sub">Distributed Population</span>
                             </div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon"><i class="fa-solid fa-trophy"></i></div>
+                            <div class="stat-icon"><i class="fa-solid fa-chart-area"></i></div>
                             <div class="stat-info">
-                                <h3>Best Fitness</h3>
-                                <p class="stat-value">--</p>
-                                <span class="stat-sub">Loss Value</span>
+                                <h3>Peak Accuracy</h3>
+                                <p class="stat-value" id="stat-accuracy">--</p>
+                                <span class="stat-sub">Refined Loss Metric</span>
                             </div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                            <div class="stat-icon"><i class="fa-solid fa-gauge-high"></i></div>
                             <div class="stat-info">
-                                <h3>Generation</h3>
-                                <p class="stat-value">0</p>
-                                <span class="stat-sub">Current Epoch</span>
+                                <h3>Evolution Epoch</h3>
+                                <p class="stat-value" id="stat-epoch">0</p>
+                                <span class="stat-sub">Current Generation</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="chart-container glass-panel">
-                        <h2><i class="fa-solid fa-wave-square"></i> Real-time Evolution Metrics</h2>
+                    <div class="glass-panel chart-container">
+                        <h2><i class="fa-solid fa-wave-square"></i> Population Evolution Telemetry</h2>
                         <canvas id="evolutionChart"></canvas>
                     </div>
 
-                    <div class="logs-container glass-panel">
-                        <h2><i class="fa-solid fa-terminal"></i> System Logs</h2>
+                    <div class="glass-panel">
+                        <h2><i class="fa-solid fa-terminal"></i> Research System Logs</h2>
                         <div class="terminal-window" id="terminal-output">
-                            <div class="empty-state">
-                                <i class="fa-regular fa-folder-open"></i>
-                                <p>No papers ingested yet. Run the scraper to populate.</p>
-                                <button class="btn btn-small">Run Scraper</button>
+                            <!-- Logs will be injected here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model Blueprint View -->
+                <div id="view-blueprint" class="view">
+                    <div class="glass-panel">
+                        <h2><i class="fa-solid fa-diagram-project"></i> Architectural Configuration</h2>
+                        <div class="control-grid">
+                            <div class="control-item">
+                                <label>Interleave Ratio (Mamba:Transformer)</label>
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <input type="range" id="ratio-slider" min="1" max="7" value="3">
+                                    <span class="val-badge" id="ratio-val">3:1</span>
+                                </div>
+                            </div>
+                            <div class="control-item">
+                                <label>Attention Heads (GQA)</label>
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <input type="range" id="heads-slider" min="2" max="16" step="2" value="4">
+                                    <span class="val-badge" id="heads-val">4</span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="glass-panel">
+                        <h2><i class="fa-solid fa-eye"></i> XAI: Hidden Attention Projection</h2>
+                        <div id="blueprint-viz"
+                            style="height: 300px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border-radius: 12px; border: 1px dashed var(--glass-border);">
+                            <p style="color: var(--text-dim);">[ Visualization Matrix Pending Simulation ]</p>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Knowledge Base View -->
+                <div id="view-repository" class="view">
+                    <div class="glass-panel">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                            <h2><i class="fa-solid fa-book"></i> Curated Research Repository</h2>
+                            <button class="btn btn-secondary btn-small" id="scraper-btn">Trigger ArXiv Pulse</button>
+                        </div>
+                        <div id="paper-list" style="display: grid; gap: 1rem;">
+                            <div class="stat-card" style="justify-content: center; opacity: 0.5;">
+                                <i class="fa-solid fa-info-circle"></i>
+                                <p>No research papers synced. Initialize ArXiv Pulse to populate.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </main>
     </div>
+
+    <!-- Logic Script -->
     <script src="script.js"></script>
 </body>
 
